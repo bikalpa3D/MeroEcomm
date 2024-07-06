@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
     return (
         
-      <Card className="w-80">
+      <Card className="w-96 pb-4">
         <CardHeader shadow={false} floated={false} className="h-96">
           <LazyLoadImage
             className="h-full w-full object-cover"
