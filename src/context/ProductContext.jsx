@@ -6,7 +6,8 @@ const ProductContext = createContext();
 export function ProductContextProvider({children}){
     const [products,setProducts]=useState([])
     const [isLoading,setIsLoading]=useState(false);
-    const [isError ,setIsError]=useState(false)
+    const [isError ,setIsError]=useState(false);
+    const [category,setCategory] = useState([])
 
     async function fetchProducts(){
         try {
@@ -24,11 +25,25 @@ export function ProductContextProvider({children}){
             setIsError(false)
         }
     }
+    async function getCategory(){
+        try {
+            const response = await fetch(`https://dummyjson.com/products/category-list`)
+            if(response.status===200){
+            const data =  await response.json()
+                setCategory(data)
+                console.log(data);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+     
     useEffect(()=>{
         fetchProducts()
+        getCategory()
     },[])
     console.log(products)
-    return <ProductContext.Provider value={{products,isLoading,isError}}>{children}</ProductContext.Provider>
+    return <ProductContext.Provider value={{products,setProducts,isLoading,setIsLoading,isError,category}}>{children}</ProductContext.Provider>
 }
 
 export function useProduct(){

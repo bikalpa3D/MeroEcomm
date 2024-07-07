@@ -1,9 +1,13 @@
+import { Slider } from '@material-tailwind/react'
 import React from 'react'
+import { useFilter } from '../context/FilterContext'
 
 const Sidebar = () => {
+  const {search,setSearch,range,setRange,ratings,setRatings}=useFilter()
+  // console.log("search:"+search,"range"+range,"rating:"+ratings);
   return (
     <div
-  className="relative flex h-full w-2/12 max-w-[20rem] flex-col rounded-xl bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
+  className="relative w-[100%] h-[100%] flex flex-col rounded-xl bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5 ">
   <div className="flex items-center gap-4 p-4 mb-2">
     <img src="https://docs.material-tailwind.com/img/logo-ct-dark.png" alt="brand" className="w-8 h-8" />
     <h5 className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -21,120 +25,54 @@ const Sidebar = () => {
       </div>
       <input
         className="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 !pr-9 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-        placeholder=" " />
+        placeholder="Search Items " value={search} onChange={(e)=>setSearch(e.target.value)}/>
       <label
         className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
         Search
       </label>
     </div>
   </div>
+  
   <nav className="flex min-w-[240px] flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700">
     <div className="relative block w-full">
       <div role="button"
-        className="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-        <button type="button"
-          className="flex items-center justify-between w-full p-3 font-sans text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-700 hover:text-blue-gray-900">
-          <div className="grid mr-4 place-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-              className="w-5 h-5">
-              <path fill-rule="evenodd"
-                d="M2.25 2.25a.75.75 0 000 1.5H3v10.5a3 3 0 003 3h1.21l-1.172 3.513a.75.75 0 001.424.474l.329-.987h8.418l.33.987a.75.75 0 001.422-.474l-1.17-3.513H18a3 3 0 003-3V3.75h.75a.75.75 0 000-1.5H2.25zm6.04 16.5l.5-1.5h6.42l.5 1.5H8.29zm7.46-12a.75.75 0 00-1.5 0v6a.75.75 0 001.5 0v-6zm-3 2.25a.75.75 0 00-1.5 0v3.75a.75.75 0 001.5 0V9zm-3 2.25a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0v-1.5z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </div>
-          <p className="block mr-auto font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-            Category
+        className="flex items-center w-full p-0 mb-5 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+       
+          <p className="block mr-auto mb-2 font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
+            price Range
           </p>
-         
-        </button>
+
       </div>
-      <div className="overflow-hidden">
-        <div className="block w-full py-1 font-sans text-sm antialiased font-light leading-normal text-gray-700">
-          <nav className="flex min-w-[240px] flex-col gap-1 p-0 font-sans text-base font-normal text-blue-gray-700">
-            <div role="button"
-              className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-              <div className="grid mr-4 place-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
-                  stroke="currentColor" aria-hidden="true" className="w-5 h-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                </svg>
-              </div>
-              Analytics
-            </div>
-            <div role="button"
-              className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-              <div className="grid mr-4 place-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
-                  stroke="currentColor" aria-hidden="true" className="w-5 h-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                </svg>
-              </div>
-              Reporting
-            </div>
-            <div role="button"
-              className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-              <div className="grid mr-4 place-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
-                  stroke="currentColor" aria-hidden="true" className="w-5 h-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                </svg>
-              </div>
-              Projects
-            </div>
-          </nav>
-        </div>
+      <div className='w-full flex items-center'>
+        <span className='font-semibold'> 0 </span>
+
+ <input type="range" name="price=" min={0} max={30000} value={range} onChange={(e)=>setRange(e.target.value)} className='accent-black will-change-auto hover:will-change-scroll'/>
+      <span className='font-semibold'>{" "}30000 </span>
       </div>
+
     </div>
-    <div className="relative block w-full">
-      <div role="button"
-        className="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-        <button type="button"
-          className="flex items-center justify-between w-full p-3 font-sans text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-700 hover:text-blue-gray-900">
-          <div className="grid mr-4 place-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-              className="w-5 h-5">
-              <path fill-rule="evenodd"
-                d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 004.25 22.5h15.5a1.875 1.875 0 001.865-2.071l-1.263-12a1.875 1.875 0 00-1.865-1.679H16.5V6a4.5 4.5 0 10-9 0zM12 3a3 3 0 00-3 3v.75h6V6a3 3 0 00-3-3zm-3 8.25a3 3 0 106 0v-.75a.75.75 0 011.5 0v.75a4.5 4.5 0 11-9 0v-.75a.75.75 0 011.5 0v.75z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </div>
-          <p className="block mr-auto font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-            E-Commerce
-          </p>
-          <span className="ml-4">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-              stroke="currentColor" aria-hidden="true" className="w-4 h-4 mx-auto transition-transform">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
-            </svg>
-          </span>
-        </button>
+    <div className="relative block w-full mt-5">
+      
+        
+          <p className="block mr-auto mb-5 font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
+           Ratings
+          </p> 
+      
+      <div className='flex flex-col justify-center'>
+
+  <label htmlFor="rating">
+    <input type="radio" name="rating" className='accent-black' value={4} onChange={(e)=>setRatings(e.target.value)} /> 
+    ⭐4 or above
+    </label>
+  
+  <label htmlFor="rating"><input type="radio" name="rating" className='accent-black' value={3} onChange={(e)=>setRatings(e.target.value)} /> ⭐3 or above</label>
+
+  <label htmlFor="rating"><input type="radio" name="rating" className='accent-black' value={2} onChange={(e)=>setRatings(e.target.value)} /> ⭐2 or above</label>
+
+  <label htmlFor="rating"><input type="radio" name="rating" className='accent-black' value={1} onChange={(e)=>setRatings(e.target.value)} /> ⭐1 or above</label>
+
       </div>
-      <div className="overflow-hidden">
-        <div className="block w-full py-1 font-sans text-sm antialiased font-light leading-normal text-gray-700">
-          <nav className="flex min-w-[240px] flex-col gap-1 p-0 font-sans text-base font-normal text-blue-gray-700">
-            <div role="button"
-              className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-              <div className="grid mr-4 place-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
-                  stroke="currentColor" aria-hidden="true" className="w-5 h-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                </svg>
-              </div>
-              Orders
-            </div>
-            <div role="button"
-              className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-              <div className="grid mr-4 place-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
-                  stroke="currentColor" aria-hidden="true" className="w-5 h-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                </svg>
-              </div>
-              Products
-            </div>
-          </nav>
-        </div>
-      </div>
+
     </div>
     <hr className="my-2 border-blue-gray-50" />
     <div role="button"

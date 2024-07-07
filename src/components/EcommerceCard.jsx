@@ -10,7 +10,7 @@ import {
   import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Link } from "react-router-dom";
   export function EcommerceCard({product}) {
-    const {id,title,price,description,thumbnail}=product;
+    const {id,title,price,description,thumbnail,rating,category}=product;
 
     return (
         
@@ -30,7 +30,7 @@ import { Link } from "react-router-dom";
             <Link to={`/product/${id}`}>
           <div className="mb-5 flex items-center justify-between">
             <Typography color="blue-gray" className="font-medium">
-              {title}
+              {title}-{category}
             </Typography>
             <Typography color="blue-gray" className="font-medium">
               ${price}
@@ -41,7 +41,7 @@ import { Link } from "react-router-dom";
             color="gray"
             className="font-thin opacity-75"
           >
-            {description}
+            {description}-{rating}⭐
           </Typography>
           </Link>
         </CardBody>
