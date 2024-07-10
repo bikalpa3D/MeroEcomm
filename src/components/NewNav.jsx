@@ -103,16 +103,7 @@ function NavListMenu() {
 
 function NavList() {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
-  function handleLogin() {
-    setIsLoggedIn((cur) => !cur);
-   console.log(location);
-
-     navigate(location?.state?.from?.pathname);
- 
-    
-  }
+  
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
       <Typography
@@ -140,11 +131,11 @@ function NavList() {
         </NavLink>
       </Typography>
       <Typography variant="small" color="blue-gray" className="font-medium">
-        <button onClick={handleLogin}>
+        <NavLink to='/login'>
           <ListItem className="flex items-center gap-2 py-2 pr-4">
             {isLoggedIn ? "LogOut" : "Login"}
           </ListItem>
-        </button>
+        </NavLink>
       </Typography>
       {/* <button onClick={handleLogin}>{isLoggedIn? 'LogOut':'Login'}</button> */}
     </List>
