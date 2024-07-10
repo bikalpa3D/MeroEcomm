@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Navbar,
   Collapse,
@@ -10,6 +10,7 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
+  Button,
 } from "@material-tailwind/react";
 import {
   ChevronDownIcon,
@@ -17,39 +18,44 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { useProduct } from "../context/ProductContext";
-import { Link, NavLink } from "react-router-dom";
-
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const {category}=useProduct();
-  
-   // <NavLink to={`/category/${el.trim()}`} key={el.id}>
-        {/* <MenuItem className="flex items-center gap-3 rounded-lg">
+  const { category } = useProduct();
+
+  // <NavLink to={`/category/${el.trim()}`} key={el.id}>
+  {
+    /* <MenuItem className="flex items-center gap-3 rounded-lg">
           
-          <div> */}
-            {/* <Typography
+          <div> */
+  }
+  {
+    /* <Typography
               variant="h6"
               color="blue-gray"
               className="flex items-center text-sm font-bold"
               
-            > */}
-            {/* </Typography> */}
-           
-          {/* </div>
-        </MenuItem> */}
-      // </NavLink>
+            > */
+  }
+  {
+    /* </Typography> */
+  }
 
-  const renderItems = category.map(
-    (el, key) => (
-      <Link key={key} to={`/category/${el}`}>
+  {
+    /* </div>
+        </MenuItem> */
+  }
+  // </NavLink>
+
+  const renderItems = category.map((el, key) => (
+    <Link key={key} to={`/category/${el}`}>
       {el}
-      </Link>
-     
-    ),
-  );
- 
+    </Link>
+  ));
+
   return (
     <React.Fragment>
       <Menu
@@ -84,11 +90,7 @@ function NavListMenu() {
         </MenuHandler>
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
           <ul className="grid grid-cols-3 gap-y-2 outline-none outline-0">
-            
-            
             {renderItems}
-            
-           
           </ul>
         </MenuList>
       </Menu>
@@ -98,8 +100,19 @@ function NavListMenu() {
     </React.Fragment>
   );
 }
- 
+
 function NavList() {
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  function handleLogin() {
+    setIsLoggedIn((cur) => !cur);
+   console.log(location);
+
+     navigate(location?.state?.from?.pathname);
+ 
+    
+  }
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
       <Typography
@@ -112,31 +125,42 @@ function NavList() {
         <ListItem className="flex items-center gap-2 py-2 pr-4">Home</ListItem>
       </Typography>
       <NavListMenu />
-      <Typography
-        
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      ><NavLink to='/product'>
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          products
-        </ListItem>
-      </NavLink>
+      <Typography variant="small" color="blue-gray" className="font-medium">
+        <NavLink to="/product">
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            products
+          </ListItem>
+        </NavLink>
       </Typography>
+      <Typography variant="small" color="blue-gray" className="font-medium">
+        <NavLink to="/cart">
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            Cart
+          </ListItem>
+        </NavLink>
+      </Typography>
+      <Typography variant="small" color="blue-gray" className="font-medium">
+        <button onClick={handleLogin}>
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            {isLoggedIn ? "LogOut" : "Login"}
+          </ListItem>
+        </button>
+      </Typography>
+      {/* <button onClick={handleLogin}>{isLoggedIn? 'LogOut':'Login'}</button> */}
     </List>
   );
 }
- 
+
 export function MegaMenuWithHover() {
   const [openNav, setOpenNav] = React.useState(false);
- 
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false),
+      () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
- 
+
   return (
     <Navbar className="sticky top-0 z-10 mx-auto max-w-screen-xl px-4 py-2">
       <div className="flex items-center justify-between text-blue-gray-900">

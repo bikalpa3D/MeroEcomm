@@ -15,7 +15,7 @@ const Product = () => {
  const {updatedProducts}=useFilter()
 
   return (
-    <div className="py-4 flex gap-10 flex-wrap justify-normal ">
+    <div className="container w-[100%] mx-auto  ">
     
       {isLoading && <Spinner className="absolute top-1/2 left-1/2 h-40 w-40" />}
       {isError && <h1>Error occured</h1>}

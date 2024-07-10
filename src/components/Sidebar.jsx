@@ -7,7 +7,7 @@ const Sidebar = () => {
   // console.log("search:"+search,"range"+range,"rating:"+ratings);
   return (
     <div
-  className="relative w-[100%] h-[100%] flex flex-col rounded-xl bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5 ">
+  className="relative w-[100%] h-[100%] flex flex-col items-center rounded-xl bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5 ">
   <div className="flex items-center gap-4 p-4 mb-2">
     <img src="https://docs.material-tailwind.com/img/logo-ct-dark.png" alt="brand" className="w-8 h-8" />
     <h5 className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -38,16 +38,19 @@ const Sidebar = () => {
       <div role="button"
         className="flex items-center w-full p-0 mb-5 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
        
-          <p className="block mr-auto mb-2 font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
+          <p className="block mr-auto font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
             price Range
           </p>
 
       </div>
+     <div className=''>
+     <span className='font-bold text-lg'>{range}</span> 
+
+     </div>
       <div className='w-full flex items-center'>
         <span className='font-semibold'> 0 </span>
-
- <input type="range" name="price=" min={0} max={30000} value={range} onChange={(e)=>setRange(e.target.value)} className='accent-black will-change-auto hover:will-change-scroll'/>
-      <span className='font-semibold'>{" "}30000 </span>
+ <input type="range" name="price=" min={0} max={2000} step={0.1} value={range} onChange={(e)=>setRange(e.target.value)} className='accent-black will-change-auto hover:will-change-scroll'/>
+      <span className='font-semibold'>{" "}2000 </span>
       </div>
 
     </div>
