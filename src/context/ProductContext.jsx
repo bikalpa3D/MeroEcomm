@@ -8,6 +8,7 @@ export function ProductContextProvider({children}){
     const [isLoading,setIsLoading]=useState(false);
     const [isError ,setIsError]=useState(false);
     const [category,setCategory] = useState([])
+    const [cart,setCart]=useState([])
 
     async function fetchProducts(){
         try {
@@ -42,8 +43,23 @@ export function ProductContextProvider({children}){
         fetchProducts()
         getCategory()
     },[])
+
     console.log(products)
-    return <ProductContext.Provider value={{products,setProducts,isLoading,setIsLoading,isError,category}}>{children}</ProductContext.Provider>
+
+    function handleCart(id){
+        setIsLoading(true);
+        const alreadyCart = cart.some(product=>product.id===id)
+        if(alreadyCart){
+            setIsLoading(false)
+            return;
+        }
+        let updateCart = products.find(product=>product.id===id) 
+        setCart([...cart,{...updateCart}])
+        console.log({...updateCart});
+        setIsLoading(false)
+        
+    }
+    return <ProductContext.Provider value={{products,setProducts,isLoading,setIsLoading,isError,category,handleCart,cart}}>{children}</ProductContext.Provider>
 }
 
 export function useProduct(){

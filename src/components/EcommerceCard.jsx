@@ -9,9 +9,15 @@ import {
   import { LazyLoadImage } from 'react-lazy-load-image-component';
   import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Link } from "react-router-dom";
+import { useProduct } from "../context/ProductContext";
   export function EcommerceCard({product}) {
     const {id,title,price,description,thumbnail,rating,category}=product;
+const{ handleCart,cart}=useProduct();
 
+
+function isCart(id){
+return cart.some(el=>el.id===id)
+}
     return (
         
       <Card className="w-96 pb-4">
@@ -46,13 +52,13 @@ import { Link } from "react-router-dom";
           </Link>
         </CardBody>
         <CardFooter className="pt-0 py-4">
-          <Button
-            ripple={false}
-            fullWidth={true}
-            className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
-          >
-            Add to Cart
-          </Button>
+         
+            <button onClick={()=>handleCart(id)} className="bg-blue-gray-900/10 text-center text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100">
+
+            
+            {!isCart(id)?'Add to Cart':<Link to='/cart'>Goto cart</Link> }
+            </button>
+          
         </CardFooter>
       </Card>
     );
